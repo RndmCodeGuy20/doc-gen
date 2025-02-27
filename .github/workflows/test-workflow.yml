@@ -1,0 +1,22 @@
+name: TestFlow
+
+on: 
+    workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10"]
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Generate Docs From Commit History
+      uses: ./
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        genai_api_key: ${{ secrets.GENAI_API_KEY }}
+        repo: ${{ github.repository }}
+        pr_number: ${{ github.event.number }}
+        prompt: "Generate a structured release note from the following commit messages:"
