@@ -1,8 +1,10 @@
 name: "Generate Docs From Commit History"
 description: "Fetches commit messages from a merged PR and generates structured release notes using OpenAI"
 author: "Shantanu Mane (RndmCodeGuy20)"
-icon: "book-open"
-color: "yellow"
+
+branding:
+  icon: "book"
+  color: "yellow"
 
 inputs:
   github_token:
