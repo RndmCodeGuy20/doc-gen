@@ -1,0 +1,37 @@
+name: "Generate Release Notes"
+description: "Fetches commit messages from a merged PR and generates structured release notes using OpenAI"
+author: "Shantanu Mane (RndmCodeGuy20)"
+
+inputs:
+  github_token:
+    description: "GitHub token for API requests"
+    required: true
+  openai_api_key:
+    description: "OpenAI API key for generating release notes"
+    required: true
+  repo:
+    description: "GitHub repository (owner/repo)"
+    required: true
+  pr_number:
+    description: "Pull request number"
+    required: true
+  prompt:
+    description: "Prompt for generating release notes"  
+    required: false
+    default: "Generate a structured release note from the following commit messages:"
+
+outputs:
+  release_notes:
+    description: "Generated release notes"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Fetch commit messages from PR
+      shell: bash
+      run: ./entrypoint.sh
+      env:
+        GITHUB_TOKEN: ${{ inputs.github_token }}
+        REPO: ${{ inputs.repo }}
+        PR_NUMBER: ${{ inputs.pr_number }}
+        OPENAI_API_KEY: ${{ inputs.openai_api_key }}
