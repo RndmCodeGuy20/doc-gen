@@ -12,8 +12,16 @@ if [ "$DRY_RUN" = "true" ]; then
   echo "[Dry Run] Would fetch commits from: $API_URL"
   COMMIT_MESSAGES=$(curl -s $API_URL | jq -r '.[].commit.message' | tr '\n' '; ')
 else
+  echo "Fetching commits from: $API_URL"
   COMMIT_MESSAGES=$(curl -s $API_URL | jq -r '.[].commit.message' | tr '\n' '; ')
 fi
+
+if [ -z "$COMMIT_MESSAGES" ]; then
+  echo "No commit messages found for PR #$PR_NUMBER"
+  exit 1
+else 
+  echo "Found commit messages: $COMMIT_MESSAGES"
+fi 
 
 export GENAI_API_KEY=$GENAI_API_KEY
 
@@ -22,5 +30,5 @@ export GENAI_API_KEY=$GENAI_API_KEY
 #   echo "[Dry Run] Would generate release notes with mock commit messages: $COMMIT_MESSAGES"
 # else
   export COMMIT_MESSAGES
-  .venv/bin/python3 main.py
+  # .venv/bin/python3 main.py
 # fi
