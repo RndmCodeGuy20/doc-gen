@@ -12,7 +12,7 @@ if [ "$DRY_RUN" = "true" ]; then
   echo "[Dry Run] Would fetch commits from: $API_URL"
   COMMIT_MESSAGES=$(curl -s $API_URL | jq -r '.[].commit.message' | tr '\n' '; ')
 else
-  COMMIT_MESSAGES=$(curl -s -H "Authorization: token $GITHUB_TOKEN" $API_URL | jq -r '.[].commit.message' | tr '\n' '; ')
+  COMMIT_MESSAGES=$(curl -s $API_URL | jq -r '.[].commit.message' | tr '\n' '; ')
 fi
 
 export GENAI_API_KEY=$GENAI_API_KEY
