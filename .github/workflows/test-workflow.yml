@@ -2,6 +2,23 @@ name: TestFlow
 
 on: 
     workflow_dispatch:
+        inputs:
+            github_token:
+                description: "GitHub token for API requests"
+                required: true
+            genai_api_key:
+                description: "GeminiAI API key for generating release notes"
+                required: true
+            repo:
+                description: "GitHub repository (owner/repo)"
+                required: true
+            pr_number:
+                description: "Pull request number"
+                required: true
+            prompt:
+                description: "Prompt for generating release notes"  
+                required: false
+                default: "Generate a structured release note from the following commit messages:"
 
 jobs:
   build:
