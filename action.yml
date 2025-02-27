@@ -1,6 +1,8 @@
 name: "Generate Release Notes"
 description: "Fetches commit messages from a merged PR and generates structured release notes using OpenAI"
 author: "Shantanu Mane (RndmCodeGuy20)"
+icon: "book-open"
+color: "yellow"
 
 inputs:
   github_token:
@@ -22,7 +24,7 @@ inputs:
 
 outputs:
   release_notes:
-    description: "Generated release notes"
+    description: "Generate Docs"
 
 runs:
   using: "composite"
