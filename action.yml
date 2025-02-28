@@ -26,16 +26,14 @@ inputs:
 
 outputs:
   release_notes:
-    description: "Generate Docs"
+    description: "Generated documentation from commit messages"
 
 runs:
-  using: "composite"
-  steps:
-    - name: Fetch commit messages from PR
-      shell: bash
-      run: ./entrypoint.sh
-      env:
-        GITHUB_TOKEN: ${{ inputs.github_token }}
-        REPO: ${{ inputs.repo }}
-        PR_NUMBER: ${{ inputs.pr_number }}
-        GENAI_API_KEY: ${{ inputs.openai_api_key }}
+  using: "docker"
+  image: "Dockerfile"
+  env:
+    GITHUB_TOKEN: ${{ inputs.github_token }}
+    REPO: ${{ inputs.repo }}
+    PR_NUMBER: ${{ inputs.pr_number }}
+    GENAI_API_KEY: ${{ inputs.genai_api_key }}
+    PROMPT: ${{ inputs.prompt }}
