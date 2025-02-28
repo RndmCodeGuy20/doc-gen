@@ -33,7 +33,7 @@ runs:
   image: "Dockerfile"
   env:
     GITHUB_TOKEN: ${{ inputs.github_token }}
+    GENAI_API_KEY: ${{ inputs.genai_api_key }}
     REPO: ${{ inputs.repo }}
     PR_NUMBER: ${{ inputs.pr_number }}
-    GENAI_API_KEY: ${{ inputs.genai_api_key }}
     PROMPT: ${{ inputs.prompt }}
